@@ -1,0 +1,6 @@
+#logging:
+#   pattern:
+#    console: "%d - %msg%n"
+#   file: /var/log/tomcat/sell.log
+#  level:
+#    com.gwh.LoggerTest: debug
