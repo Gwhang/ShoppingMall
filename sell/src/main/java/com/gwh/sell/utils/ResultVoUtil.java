@@ -4,6 +4,7 @@ import com.gwh.sell.vo.ResultVo;
 
 /**
  * 结果返回公共方法
+ * @author  gwh
  */
 public class ResultVoUtil {
 
