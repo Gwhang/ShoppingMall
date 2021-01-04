@@ -1,26 +1,21 @@
-package com.gwh.sell.dataObject;
+package com.gwh.sell.dto;
 
+import com.gwh.sell.dataObject.OrderDetail;
 import com.gwh.sell.enums.OrderStatusEnum;
 import com.gwh.sell.enums.PayStatusEnum;
 import lombok.Data;
-import org.hibernate.annotations.DynamicUpdate;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 /**
- * 订单主表
- * @author gwh
+ * 订单表
  */
-@Entity
 @Data
-@DynamicUpdate //动态更新
-public class OrderMaster {
+public class OrderDTO {
 
     /**
      * 订单单号
@@ -77,9 +72,7 @@ public class OrderMaster {
      * 订单明细表List
      * Transient 数据库进行增加和修改时 忽略该字段
      */
-//    @Transient
-//    private List<OrderDetail> orderDetailList;
-
-
+    @Transient
+    private List<OrderDetail> orderDetailList;
 
 }

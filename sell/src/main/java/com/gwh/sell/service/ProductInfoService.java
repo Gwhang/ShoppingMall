@@ -1,6 +1,7 @@
 package com.gwh.sell.service;
 
 import com.gwh.sell.dataObject.ProductInfo;
+import com.gwh.sell.dto.CartDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -37,10 +38,11 @@ public interface ProductInfoService {
     /**
      * 加库存
      */
-
+    void increaseStock(List<CartDTO> cartDTOList);
 
     /**
      * 减库存
      */
+    void decreaseStock(List<CartDTO> cartDTOList);
 
 }
