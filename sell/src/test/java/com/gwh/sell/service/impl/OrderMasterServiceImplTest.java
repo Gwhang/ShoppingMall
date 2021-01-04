@@ -9,6 +9,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.*;
@@ -57,10 +59,26 @@ public class OrderMasterServiceImplTest extends TestCase {
 
     }
 
+    /**
+     * 查询订单信息
+     */
+    @Test
     public void testFindOne() {
+        OrderDTO orderDTO = this.orderMasterService.findOne("1609769672506405621");
+        System.out.println(orderDTO);
+        Assert.assertNotNull(orderDTO);
+
     }
 
+    /**
+     * 分页查询
+     */
+    @Test
     public void testFindAll() {
+        PageRequest request= new PageRequest(0,2);
+        Page<OrderDTO> orderDTOPage = this.orderMasterService.findAll("ok123456789", request);
+        Assert.assertNotEquals(0,orderDTOPage.getSize());
+
     }
 
     public void testCancel() {
