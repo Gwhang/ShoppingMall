@@ -3,6 +3,8 @@ package com.gwh.sell.service.impl;
 import com.gwh.sell.dataObject.OrderDetail;
 import com.gwh.sell.dataObject.OrderMaster;
 import com.gwh.sell.dto.OrderDTO;
+import com.gwh.sell.enums.OrderStatusEnum;
+import com.gwh.sell.enums.PayStatusEnum;
 import junit.framework.TestCase;
 import org.junit.Assert;
 import org.junit.Test;
@@ -81,12 +83,31 @@ public class OrderMasterServiceImplTest extends TestCase {
 
     }
 
+    /**
+     * 订单取消
+     */
+    @Test
     public void testCancel() {
+        OrderDTO orderDTO = this.orderMasterService.findOne("1609769672506405621");
+        OrderDTO orderinfo = this.orderMasterService.cancel(orderDTO);
+        Assert.assertEquals(OrderStatusEnum.CANCEL.getCode(),orderinfo.getOrderStatus());
+
     }
 
+    /**
+     * 完结订单
+     */
+    @Test
     public void testFinish() {
+        OrderDTO orderDTO = this.orderMasterService.findOne("1609769672506405621");
+        OrderDTO orderinfo = this.orderMasterService.finish(orderDTO);
+        Assert.assertEquals(OrderStatusEnum.FINISHED.getCode(),orderinfo.getOrderStatus());
     }
 
+    @Test
     public void testPaid() {
+        OrderDTO orderDTO = this.orderMasterService.findOne("1609769672506405621");
+        OrderDTO orderinfo = this.orderMasterService.paid(orderDTO);
+        Assert.assertEquals(PayStatusEnum.SUCCESS.getCode(),orderinfo.getPayStatus());
     }
 }

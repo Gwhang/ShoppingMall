@@ -68,8 +68,21 @@ public class ProductInfoServiceImpl implements ProductInfoService {
         return this.productInfoDao.save(productInfo);
     }
 
+    /**
+     * 加库存
+     * @param cartDTOList
+     */
     @Override
     public void increaseStock(List<CartDTO> cartDTOList) {
+        cartDTOList.stream().forEach(p -> {
+            ProductInfo productInfo=this.findOne(p.getProductId());
+            if (productInfo.equals(null)){
+                throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+            }
+            Integer result = productInfo.getProductStock() + p.getProductQuantity();
+            productInfo.setProductStock(result);
+            this.productInfoDao.save(productInfo);
+        });
 
     }
 
