@@ -13,6 +13,7 @@ import com.gwh.sell.enums.PayStatusEnum;
 import com.gwh.sell.enums.ResultEnum;
 import com.gwh.sell.exception.SellException;
 import com.gwh.sell.service.OrderMasterService;
+import com.gwh.sell.service.PayService;
 import com.gwh.sell.service.ProductInfoService;
 import com.gwh.sell.utils.KeyUtil;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
@@ -46,6 +47,9 @@ public class OrderMasterServiceImpl implements OrderMasterService {
 
     @Autowired
     private ProductInfoService productInfoService;
+
+    @Autowired
+    private PayService payService;
 
 
     /**
@@ -170,7 +174,8 @@ public class OrderMasterServiceImpl implements OrderMasterService {
         this.productInfoService.increaseStock(cartDTOList);
         //如果订单已经支付 则修改进行退款
         if (orderMaster.getPayStatus().equals(PayStatusEnum.SUCCESS)){
-            // TODO 订单支付进行退款
+            // 订单支付进行退款
+            payService.refund(orderDTO);
         }
         return orderDTO;
     }

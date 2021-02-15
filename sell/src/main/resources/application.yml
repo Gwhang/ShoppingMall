@@ -21,3 +21,11 @@ server:
 wechat:
    mpAppId: wx5f2bf083338005c6
    mpAppSecret: c901f92c34142ef9946545969cafbbc0
+   mchId: #微信支付商户号
+   mchKey: #微信支付商户密钥
+   subAppId: #服务商模式下的子商户公众账号ID
+   subMchId: #服务商模式下的子商户号
+   keyPath: # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
+   notifyUrl: http://localhost:8080/sell/pay/notify
+   openAppId: wx6ad144e54af67d87
+   openAppSecret: 91a2ff6d38a2bbccfb7e9f9079108e2e

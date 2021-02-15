@@ -32,6 +32,7 @@ public enum ResultEnum {
 
     ORDER_OPENID_ERROR(19,"当前订单不属于当前用户"),
 
+    WXPAY_NOTIFY_MONEY_VERIFY_ERROR(20,"订单金额与系统金额不一致"),
     ;
     private Integer code;
     private String name;
