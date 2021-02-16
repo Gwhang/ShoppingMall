@@ -4,7 +4,7 @@ package com.gwh.sell.enums;
  * 订单状态枚举
  * @author gwh
  */
-public enum OrderStatusEnum {
+public enum OrderStatusEnum implements CodeEnum {
 
     NEW(0,"新订单"),
     FINISHED(1,"完结"),
@@ -44,4 +44,20 @@ public enum OrderStatusEnum {
     public void setName(String name) {
         this.name = name;
     }
+
+
+    /**
+     * 根据code 获取name
+     * @param code
+     * @return
+     */
+    public String getOrderStatusEnum(Integer code){
+        for (OrderStatusEnum orderStatusEnum:OrderStatusEnum.values()){
+            if(orderStatusEnum.getCode().equals(code)){
+                return orderStatusEnum.getName();
+            }
+        }
+        return null;
+    }
+
 }

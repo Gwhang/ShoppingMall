@@ -15,6 +15,7 @@ import com.gwh.sell.exception.SellException;
 import com.gwh.sell.service.OrderMasterService;
 import com.gwh.sell.service.PayService;
 import com.gwh.sell.service.ProductInfoService;
+import com.gwh.sell.utils.EnumUtil;
 import com.gwh.sell.utils.KeyUtil;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -226,5 +227,22 @@ public class OrderMasterServiceImpl implements OrderMasterService {
         BeanUtils.copyProperties(orderDTO,orderMaster);
         this.orderMasterDao.save(orderMaster);
         return orderDTO;
+    }
+
+    /**
+     * 分页查下全量数据
+     * @param pageable
+     * @return
+     */
+    @Override
+    public Page<OrderDTO> findList(Pageable pageable) {
+        Page<OrderMaster> list = this.orderMasterDao.findAll(pageable);
+
+        List<OrderDTO> orderDTOS = OrderMaster2OrderDTOConverter.converter(list.getContent());
+        orderDTOS.stream().forEach(p -> {p.setOrderStatusName(EnumUtil.getByCode(p.getOrderStatus(),OrderStatusEnum.class).getName());
+            p.setPayStatusName(EnumUtil.getByCode(p.getPayStatus(),PayStatusEnum.class).getName());
+        });
+        Page<OrderDTO> orderDTOPage = new PageImpl<OrderDTO>(orderDTOS,pageable,list.getTotalElements());
+        return orderDTOPage;
     }
 }

@@ -4,7 +4,7 @@ package com.gwh.sell.enums;
  * 支付状态枚举
  * @author gwh
  */
-public enum PayStatusEnum {
+public enum PayStatusEnum implements CodeEnum{
 
     WAIT(0,"未支付"),
     SUCCESS(1,"已支付"),

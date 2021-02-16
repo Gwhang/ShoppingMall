@@ -110,4 +110,16 @@ public class OrderMasterServiceImplTest extends TestCase {
         OrderDTO orderinfo = this.orderMasterService.paid(orderDTO);
         Assert.assertEquals(PayStatusEnum.SUCCESS.getCode(),orderinfo.getPayStatus());
     }
+
+    /**
+     * 分页查下订单数据
+     */
+    @Test
+    public void testFindList(){
+        PageRequest request= new PageRequest(0,2);
+        Page<OrderDTO> orderDTOPage = this.orderMasterService.findList(request);
+        Assert.assertNotEquals(0,orderDTOPage.getSize());
+
+    }
+
 }
