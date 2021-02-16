@@ -35,7 +35,11 @@ public enum ResultEnum {
     WXPAY_NOTIFY_MONEY_VERIFY_ERROR(20,"订单金额与系统金额不一致"),
 
     ORDER_CANCEL_SUCCESS(21,"取消订单成功"),
+
     ORDER_FINISH_SUCCESS(22,"完结订单成功"),
+
+    PRODUCT_STATUS_ERROR(23,"商品上架状态不正确"),
+
     ;
     private Integer code;
     private String name;

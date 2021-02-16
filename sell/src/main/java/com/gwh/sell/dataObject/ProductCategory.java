@@ -5,6 +5,7 @@ import lombok.Data;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * 类目实体类
@@ -27,6 +28,11 @@ public class ProductCategory {
     private String categoryName;
     // 类目编号
     private Integer categoryType;
+
+    private Date createTime;
+
+    private Date updateTime;
+
 
     public ProductCategory() {
     }

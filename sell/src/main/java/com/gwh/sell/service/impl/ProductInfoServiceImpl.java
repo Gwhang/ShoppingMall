@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * 商品详情业务层
@@ -105,6 +106,46 @@ public class ProductInfoServiceImpl implements ProductInfoService {
             productInfo.setProductStock(result);
             this.productInfoDao.save(productInfo);
         });
+    }
 
+    /**
+     * 上架
+     * @param productId
+     * @return
+     */
+    @Override
+    public ProductInfo onSale(String productId) {
+        //查询商品信息
+        Optional<ProductInfo> productInfo = this.productInfoDao.findById(productId);
+        if(!productInfo.isPresent()){
+            throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+        if(productInfo.get().getProductStatus()== 0){
+            throw  new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+        productInfo.get().setProductStatus(ProductStatusEnum.UP.getCode());
+        this.productInfoDao.save(productInfo.get());
+
+        return productInfo.get();
+    }
+
+    /**
+     * 下架
+     * @param productId
+     * @return
+     */
+    @Override
+    public ProductInfo offSale(String productId) {
+        //查询商品信息
+        Optional<ProductInfo> productInfo = this.productInfoDao.findById(productId);
+        if(!productInfo.isPresent()){
+            throw new SellException(ResultEnum.PRODUCT_NOT_EXIST);
+        }
+        if(productInfo.get().getProductStatus()== 1){
+            throw  new SellException(ResultEnum.PRODUCT_STATUS_ERROR);
+        }
+        productInfo.get().setProductStatus(ProductStatusEnum.DOWN.getCode());
+        this.productInfoDao.save(productInfo.get());
+        return productInfo.get();
     }
 }

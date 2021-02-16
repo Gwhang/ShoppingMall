@@ -17,7 +17,6 @@ import com.gwh.sell.service.PayService;
 import com.gwh.sell.service.ProductInfoService;
 import com.gwh.sell.utils.EnumUtil;
 import com.gwh.sell.utils.KeyUtil;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
