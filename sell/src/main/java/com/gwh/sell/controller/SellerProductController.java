@@ -12,6 +12,9 @@ import com.gwh.sell.vo.ProductInfoVo;
 import com.gwh.sell.vo.ProductVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -118,12 +121,16 @@ public class SellerProductController {
     }
     /**
      * 保存/更新
+     * CachePut 每次都会执行次方法， 每次读取缓存并更新缓存
+     * CacheEvict 清除缓存
      * @param form
      * @param bindingResult
      * @param map
      * @return
      */
     @PostMapping("/save")
+    //@CachePut(cacheNames = "product",key = "123")
+    @CacheEvict(cacheNames = "product",key = "123")
     public ModelAndView save(@Valid ProductForm form,
                              BindingResult bindingResult,
                              Map<String, Object> map) {

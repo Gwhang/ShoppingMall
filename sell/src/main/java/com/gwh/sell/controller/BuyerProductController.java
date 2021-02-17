@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,9 +39,11 @@ public class BuyerProductController {
 
     /**
      * 查询商品列表
+     * Cacheable 第一次查询到结果以后 会保存到redis中 第二次查询的时候 将不走次方法
      * @return
      */
     @GetMapping("/list")
+    @Cacheable(cacheNames = "product",key = "123")
     public ResultVo list(){
         // 1.查询所有上架商品
            List<ProductInfo> productInfoList = this.productInfoService.findUpAll();

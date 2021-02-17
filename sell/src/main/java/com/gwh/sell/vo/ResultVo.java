@@ -2,13 +2,14 @@ package com.gwh.sell.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 公共返回类
  */
 @Data
-public class ResultVo<T> {
+public class ResultVo<T> implements Serializable {
 
     /**
      * 返回状态
