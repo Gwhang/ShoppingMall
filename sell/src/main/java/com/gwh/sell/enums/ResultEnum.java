@@ -40,6 +40,10 @@ public enum ResultEnum {
 
     PRODUCT_STATUS_ERROR(23,"商品上架状态不正确"),
 
+    LOGIN_FAIL(24,"登录失败"),
+
+    LOGOUT_SUCCESS(25,"登出成功"),
+
     ;
     private Integer code;
     private String name;

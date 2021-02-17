@@ -12,9 +12,7 @@ import com.gwh.sell.enums.OrderStatusEnum;
 import com.gwh.sell.enums.PayStatusEnum;
 import com.gwh.sell.enums.ResultEnum;
 import com.gwh.sell.exception.SellException;
-import com.gwh.sell.service.OrderMasterService;
-import com.gwh.sell.service.PayService;
-import com.gwh.sell.service.ProductInfoService;
+import com.gwh.sell.service.*;
 import com.gwh.sell.utils.EnumUtil;
 import com.gwh.sell.utils.KeyUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -50,6 +48,12 @@ public class OrderMasterServiceImpl implements OrderMasterService {
 
     @Autowired
     private PayService payService;
+
+    @Autowired
+    private PushMessageService pushMessageService;
+
+    @Autowired
+    private WebSocket webSocket;
 
 
     /**
@@ -95,6 +99,10 @@ public class OrderMasterServiceImpl implements OrderMasterService {
              new CartDTO(p.getProductId(),p.getProductQuantity())
         ).collect(Collectors.toList());
         this.productInfoService.decreaseStock(cartDTOList);
+
+        //下单成功 触发webSock广播
+        webSocket.sendMessage(orderDTO.getOrderId());
+
         return orderDTO;
     }
 
@@ -200,6 +208,12 @@ public class OrderMasterServiceImpl implements OrderMasterService {
         OrderMaster orderMaster = new OrderMaster();
         BeanUtils.copyProperties(orderDTO,orderMaster);
         this.orderMasterDao.save(orderMaster);
+        //推送模板消息
+        try{
+            pushMessageService.orderStatus(orderDTO);
+        }catch (Exception e){
+
+        }
         return orderDTO;
     }
 

@@ -14,6 +14,9 @@ spring:
     show-sql: true #打印SQL
   jackson:
     default-property-inclusion: non_null #返回对象属性为null 不返回
+  redis:
+    host: 192.168.92.129
+    port: 6379
 #  freemarker:
 #    template-loader-path: classpath:/templates/
 #    cache: false
@@ -39,5 +42,12 @@ wechat:
    subMchId: #服务商模式下的子商户号
    keyPath: # p12证书的位置，可以指定绝对路径，也可以指定类路径（以classpath:开头）
    notifyUrl: http://localhost:8080/sell/pay/notify
-   openAppId: wx6ad144e54af67d87
-   openAppSecret: 91a2ff6d38a2bbccfb7e9f9079108e2e
+   openAppId: 开放平台id
+   openAppSecret: 开发平台密钥
+   templateId:
+     orderStatus: 892koXAPwwx7y03LcYhr6oFyFqy8gHJXT1iXJZJEq4g
+
+projectUrl:
+  wechatMpAuthorize: http://sell.ngrok2.xiaomiqiu.cn
+  wechatOpenAuthorize: http://sell.ngrok2.xiaomiqiu.cn
+  sell: http://127.0.0.1:8080
